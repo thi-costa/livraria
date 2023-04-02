@@ -1,0 +1,687 @@
+{
+	"info": {
+		"_postman_id": "65688f16-8aeb-421b-a893-fd4389c6de12",
+		"name": "projeto-livraria",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12903768"
+	},
+	"item": [
+		{
+			"name": "/livros",
+			"item": [
+				{
+					"name": "/categoria",
+					"item": [
+						{
+							"name": "Listar Livros por Categoria",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/categoria/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"categoria",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "filtros",
+					"item": [
+						{
+							"name": "Filtrar livros por nome",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/filter?nome=clean",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "nome",
+											"value": "clean"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar livros por isbn",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/filter?isbn=8576082675",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "isbn",
+											"value": "8576082675"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar livros por nome ou por ISBN",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/filter?isbn=8576082674&nome=clean",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "isbn",
+											"value": "8576082674"
+										},
+										{
+											"key": "nome",
+											"value": "clean"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/editora",
+					"item": [
+						{
+							"name": "Listar Livros por Editora",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/editora/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"editora",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/favoritar",
+					"item": [
+						{
+							"name": "Favoritar Livro",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/favoritos/3",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"favoritos",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Desfavoritar Livro",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/favoritos/2",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"favoritos",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar Favoritos do Usuário",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/livros/favoritos",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"livros",
+										"favoritos"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Criar Livro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Python\",\n    \"isbn\": \"8560280949\",\n    \"editora\": {\n        \"id\": 1\n    },\n    \"categoria\": {\n        \"id\": 1\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/livros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Livros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Livro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Livro por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/livros/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Livro",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 2,\n    \"nome\": \"Clean code\",\n    \"isbn\": \"8576082675\",\n    \"categoria\": {\n        \"id\": 1,\n        \"nome\": \"Técnico\"\n    },\n    \"editora\": {\n        \"id\": 2,\n        \"nome\": \"Alta Books\",\n        \"descricao\": \"O seu portal do conhecimento\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/livros/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"livros",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/editoras",
+			"item": [
+				{
+					"name": "Criar Editora",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Pearson\",\n    \"descricao\": \"Livros de inglês\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/editoras",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editoras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Editoras",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGlhZ28xIiwiaXNzIjoiVGhpYWdvIiwiaWF0IjoxNjgwMzYzOTE0LCJleHAiOjE2ODAzNjU3MTR9.QTWdT_2mA7bWDYJOGGa5QKsyba9m_rQipPbhSPnhMik",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/editoras",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editoras"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Editora por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/editoras/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editoras",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Editora",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/editoras/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editoras",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Editora",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Suma\",\n    \"descricao\": \"O selo de fantasia, terror, sci-fi e HQ do Grupo Companhia das Letras\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/editoras/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"editoras",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/categorias",
+			"item": [
+				{
+					"name": "Criar Categoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Técnico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Categoria por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Categoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categorias/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Categoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nome\": \"Técnico\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categorias/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "security",
+			"item": [
+				{
+					"name": "/usuarios",
+					"item": [
+						{
+							"name": "Criar Usuários",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nome\": \"João\",\n    \"username\": \"joao1\",\n    \"email\": \"joao@emaill.com\",\n    \"password\": \"123456\",\n    \"cpf\": \"66666666699\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/usuarios",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuarios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logar",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"thiago1\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/usuarios/auth",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"usuarios",
+										"auth"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGlhZ28xIiwiaXNzIjoiVGhpYWdvIiwiaWF0IjoxNjgwNDA3OTczLCJleHAiOjE2ODA0MDk3NzN9.8YdUdqM0l4s2WbvzEz5AJ0oc0rTjVF5u8KQxI8n3E1I",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*")
 @Tag(name = "Usuarios", description = "Usuarios API")
 @Slf4j
 public class UsuarioController {
@@ -37,9 +36,7 @@ public class UsuarioController {
     @PostMapping("/auth")
     public ResponseEntity<Object> entrar(@RequestBody UsuarioLoginDTO usuario){
         try {
-            service.entrar(usuario);
-
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(service.entrar(usuario));
         } catch (EntityNotFoundException ex){
             log.error(ex.getMessage());
             return ResponseEntity

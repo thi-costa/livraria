@@ -1,8 +1,10 @@
 package com.example.livraria.controller;
 
+import com.example.livraria.model.dto.LivroFavoritoDTO;
 import com.example.livraria.model.dto.MensagemDTO;
 import com.example.livraria.service.LivroService;
 import com.example.livraria.model.dto.LivroDTO;
+import com.example.livraria.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
@@ -11,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/livros")
-@CrossOrigin(origins = "*")
 @Tag(name = "Livros", description = "Livros API")
 @Slf4j
 public class LivroController {
@@ -61,6 +63,84 @@ public class LivroController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(livroService.criar(livroDTO));
+
+        } catch(Exception ex) {
+            log.error(ex.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new MensagemDTO(ex.getMessage()));
+        }
+    }
+    @GetMapping("/favoritos")
+    @Operation(summary = "Retorna lista de livros favoritos")
+    public ResponseEntity<Object> listarFavoritos() {
+        try {
+            String username = "";
+
+            if(SecurityContextHolder.getContext().getAuthentication() != null){
+                username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+            }
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(livroService.listarFavoritos(username));
+
+
+        } catch(Exception ex) {
+            log.error(ex.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new MensagemDTO(ex.getMessage()));
+        }
+    }
+
+    @PostMapping("/favoritos/{id}")
+    @Operation(summary = "Favorita 1 livro")
+    public ResponseEntity<Object> favoritar(@PathVariable("id") Long id) {
+        try {
+            String username = "";
+
+            if(SecurityContextHolder.getContext().getAuthentication() != null){
+                username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+            }
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(livroService.favoritar(username, id));
+
+
+        } catch(Exception ex) {
+            log.error(ex.getMessage());
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(new MensagemDTO(ex.getMessage()));
+        }
+    }
+    @DeleteMapping("/favoritos/{id}")
+    @Operation(summary = "Desfavorita 1 livro")
+    public ResponseEntity<Object> desfavoritar(@PathVariable("id") Long id) {
+        try {
+            if(SecurityContextHolder.getContext().getAuthentication() == null){
+                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+
+            }
+            String username = "";
+
+            if(SecurityContextHolder.getContext().getAuthentication() != null){
+                username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+
+            }
+
+            if(username.isEmpty()){
+                throw new EntityNotFoundException("Usuário vazio ou inexistente");
+            }
+
+            livroService.desfavoritar(username, id);
+
+            return ResponseEntity
+                    .ok(new MensagemDTO("Livro com id "+id+" desfavoritado com sucesso!"));
+
 
         } catch(Exception ex) {
             log.error(ex.getMessage());

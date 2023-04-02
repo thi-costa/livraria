@@ -7,29 +7,32 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Entity
-@Table(name = "livro")
-public class LivroEntity {
+@Table(name = "livro_favorito")
+public class LivroFavoritoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "nome", nullable = false)
-    private String nome;
-    @Column(name = "isbn", nullable = false)
-    @Size(max = 13, message = "O 'isbn' do 'livro' só pode ter no máximo 13 caracteres")
-    private String isbn;
-    @OneToMany(mappedBy = "livro")
-    private List<LivroFavoritoEntity> livrosFavoritos;
+
     @ManyToOne
-    @JoinColumn(name = "editora", nullable = false)
-    private EditoraEntity editora;
+    @JoinColumn(name = "livro", nullable = false)
+    private LivroEntity livro;
     @ManyToOne
-    @JoinColumn(name = "categoria", nullable = false)
-    private CategoriaEntity categoria;
+    @JoinColumn(name = "usuario", nullable = false)
+    private UsuarioEntity usuario;
+
+    // Adicionado limitação de que um usuário só pode ter o mesmo livro favoritado 1 vez
+    @Column(unique=true)
+    private String combinacaoLivroUsuario;
+
+    @PrePersist
+    private void setCombinacaoLivroUsuario(){
+        this.combinacaoLivroUsuario =  livro.getId()+ ":" + usuario.getId();
+    }
+
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;

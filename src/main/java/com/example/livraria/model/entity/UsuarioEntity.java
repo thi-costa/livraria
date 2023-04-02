@@ -30,6 +30,13 @@ public class UsuarioEntity implements UserDetails {
     private String cpf;
     private String password;
 
+    @OneToMany(mappedBy = "usuario")
+    private List<LivroFavoritoEntity> livrosFavoritos;
+
+    @ManyToOne
+    @JoinColumn
+    private PerfilEntity perfil;
+
 
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
@@ -42,6 +49,9 @@ public class UsuarioEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(perfil != null){
+            return List.of(perfil);
+        }
         return null;
     }
 

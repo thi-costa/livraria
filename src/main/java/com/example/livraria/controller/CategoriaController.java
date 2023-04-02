@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/categorias")
-@CrossOrigin(origins = "*")
 @Tag(name = "Categorias", description = "Categorias API")
 @Slf4j
 public class CategoriaController {

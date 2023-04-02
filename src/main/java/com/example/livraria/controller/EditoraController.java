@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -54,6 +55,7 @@ public class EditoraController {
         }
     }
     @PostMapping
+    @Secured("ADMIN")
     @Operation(summary = "Cria 1 editora")
     public ResponseEntity<Object> criar(@RequestBody @Valid EditoraDTO editoraDTO) {
         try {
@@ -70,6 +72,7 @@ public class EditoraController {
     }
 
     @PutMapping("/{id}")
+    @Secured("ADMIN")
     @Operation(summary = "Edita 1 editora por ID")
     public ResponseEntity<Object> editar(
             @RequestBody @Valid EditoraDTO produtoDTO,
@@ -93,6 +96,7 @@ public class EditoraController {
     }
 
     @DeleteMapping("/{id}")
+    @Secured("ADMIN")
     @Operation(summary = "Deleta 1 editora por ID")
     public ResponseEntity<Object> deletar(
             @PathVariable("id") Long id) {
