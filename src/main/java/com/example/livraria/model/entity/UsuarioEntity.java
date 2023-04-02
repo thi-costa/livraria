@@ -25,9 +25,10 @@ public class UsuarioEntity implements UserDetails {
 
     private String email;
     private String nome;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
     private String cpf;
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "usuario")
