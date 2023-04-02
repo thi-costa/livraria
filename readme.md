@@ -44,6 +44,7 @@ Atributos:
 Atributos:
 
 * id - Long
+* combinacao_livro_usuario - String - variável auxiliar para mapear relações duplicadas
 * livro_id - Long - relacionamento com a entidade livro
 * user_id - Long - relacionamento com a entidade usuário
 
