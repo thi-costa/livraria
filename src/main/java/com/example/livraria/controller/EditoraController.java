@@ -36,7 +36,7 @@ public class EditoraController {
         }
     }
     @GetMapping("/{id}")
-    @Operation(summary = "Edita 1 editora por ID")
+    @Operation(summary = "Busca 1 editora por ID")
     public ResponseEntity<Object> pegarUm(@PathVariable("id") Long id){
         try {
             return ResponseEntity.ok(editoraService.pegarPorId(id));

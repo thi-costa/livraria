@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -56,6 +57,7 @@ public class CategoriaController {
         }
     }
     @PostMapping
+    @Secured("ADMIN")
     @Operation(summary = "Cria 1 categoria")
     public ResponseEntity<Object> criar(@RequestBody @Valid CategoriaDTO categoriaDTO) {
         try {
@@ -72,6 +74,7 @@ public class CategoriaController {
         }
     }
     @PutMapping("/{id}")
+    @Secured("ADMIN")
     @Operation(summary = "Edita 1 categoria por ID")
     public ResponseEntity<Object> editar(
             @RequestBody @Valid CategoriaDTO categoriaDTO,
@@ -95,6 +98,7 @@ public class CategoriaController {
         }
     }
     @DeleteMapping("/{id}")
+    @Secured("ADMIN")
     @Operation(summary = "Deleta 1 categoria por ID")
     public ResponseEntity<Object> deletar(
             @PathVariable("id") Long id) {
